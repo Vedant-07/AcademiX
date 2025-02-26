@@ -1,0 +1,39 @@
+# Ignore node_modules (dependencies)
+node_modules/
+
+# Ignore log files
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Ignore environment variables (secrets)
+.env
+.env.local
+.env.development
+.env.production
+
+# Ignore build/output directories
+dist/
+build/
+
+# Ignore dependency lock files (optional)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Ignore temporary files
+*.log
+*.tmp
+.DS_Store
+
+# Ignore IDE and editor config files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore coverage reports (if using Jest)
+coverage/
+
+# Ignore Husky hooks
+.husky/

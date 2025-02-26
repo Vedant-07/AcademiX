@@ -1,2 +1,3 @@
 # academiX
-SE project 
+
+SE project
