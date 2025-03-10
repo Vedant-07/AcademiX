@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 7777;
-const connectDb = require("./config/db");
 
-app.use("/hello-dev", (_req, res) => {
-  res.send({
-    from: "backend",
-    date: new Date().toString(),
-  });
-});
+const connectDb = require("./config/db");
+const authRouter = require("./routes/authRouter");
+const cookieParser = require("cookie-parser");
+const PORT = process.env.PORT || 7777;
+
+app.use("/", express.json());
+app.use(cookieParser());
+
+app.use("/auth", authRouter);
 
 connectDb()
   .then(() => {
