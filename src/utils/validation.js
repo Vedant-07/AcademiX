@@ -1,12 +1,17 @@
 const validator = require("validator");
 
 const checkValidUser = (user_data) => {
-  const { name, emailId, password } = user_data;
-  if (password.length < 3 || name.length < 1)
+  const { firstName, emailId, password } = user_data;
+  if (password.length < 3 || firstName.length < 1)
     throw new error("password/name is not of valid length");
   if (!validator.isEmail(emailId)) throw new error("not valid email");
 };
 
+const checkValidUserFields = (user_data, user_fields) => {
+  return Object.keys(user_data).every((k) => user_fields.includes(k));
+};
+
 module.exports = {
   checkValidUser,
+  checkValidUserFields,
 };

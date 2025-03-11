@@ -44,7 +44,7 @@ authRouter.post("/login", async (req, res) => {
 
     res.cookie("token", user.getJWT());
     res.status(200).json({
-      error: "-- User found in AcademiX 🚀 --",
+      success: "-- User found in AcademiX 🚀 --",
     });
   } catch (err) {
     res.status(404).json({

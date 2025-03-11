@@ -1,4 +1,6 @@
 ### things missed
 
-- required field in all the schemas
-- password check
+# user management & profile
+
+- password reset left
+- user profile delete left
