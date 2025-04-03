@@ -6,6 +6,7 @@ const groupRouter = require("./routes/groupRouter");
 const cookieParser = require("cookie-parser");
 const postRouter = require("./routes/postRouter");
 const commentRouter = require("./routes/commentRouter");
+const voteRouter = require("./routes/voteRouter");
 
 const PORT = process.env.PORT || 7777;
 
@@ -18,6 +19,7 @@ app.use("/profile", profileRouter);
 app.use("/groups", groupRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
+app.use("/votes", voteRouter);
 
 connectDb()
   .then(() => {
