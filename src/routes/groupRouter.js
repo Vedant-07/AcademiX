@@ -244,4 +244,19 @@ groupRouter.get("/", userAuth, async (req, res) => {
   }
 });
 
+groupRouter.get("/user/:userId", userAuth, async (req, res) => {
+  try {
+    // Find all Memberships where the user is a member and populate the 'group_id' field
+    const memberships = await Membership.find({
+      user_id: req.params.userId,
+    }).populate("group_id");
+    const groups = memberships.map((membership) => membership.group_id);
+
+    res.status(200).json(groups);
+  } catch (error) {
+    console.error("Error fetching groups for user:", error);
+    res.status(500).json({ error: "Error fetching groups for user" });
+  }
+});
+
 module.exports = groupRouter;

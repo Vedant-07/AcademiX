@@ -13,7 +13,7 @@ const userAuth = async (req, res, next) => {
     const { _id } = DecryptMsg;
     //Identify the user
     const user = await User.findById(_id);
-    console.log("user is ", user);
+    //console.log("user is ", user);
 
     if (!user) return res.status(401).json({ error: "message" });
     req.user = user;
