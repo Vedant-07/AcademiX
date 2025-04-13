@@ -8,6 +8,8 @@ const postRouter = require("./routes/postRouter");
 const commentRouter = require("./routes/commentRouter");
 const voteRouter = require("./routes/voteRouter");
 const cors = require("cors");
+const { createServer } = require("http");
+const initializeSocket = require("./utils/socket");
 
 const PORT = process.env.PORT || 7777;
 
@@ -29,10 +31,13 @@ app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/votes", voteRouter);
 
+const server = createServer(app);
+initializeSocket(server);
+
 connectDb()
   .then(() => {
     console.log("connection to db established");
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`server is listening on port ${PORT}`);
     });
   })

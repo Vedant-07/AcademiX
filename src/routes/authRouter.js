@@ -40,12 +40,9 @@ authRouter.post("/login", async (req, res) => {
       throw new Error("invalid password ");
     }
     console.log("user is Logged in ");
-    console.log(user);
 
     res.cookie("token", user.getJWT());
-    res.status(200).json({
-      success: "-- User found in AcademiX 🚀 --",
-    });
+    res.status(200).json(user);
   } catch (err) {
     res.status(404).json({
       error: "-- User not found in AcademiX --" + err.message,
