@@ -10,6 +10,7 @@ const voteRouter = require("./routes/voteRouter");
 const cors = require("cors");
 const { createServer } = require("http");
 const initializeSocket = require("./utils/socket");
+const chatRouter = require("./routes/chatRouter");
 
 const PORT = process.env.PORT || 7777;
 
@@ -30,6 +31,7 @@ app.use("/groups", groupRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/votes", voteRouter);
+app.use("/chats", chatRouter);
 
 const server = createServer(app);
 initializeSocket(server);

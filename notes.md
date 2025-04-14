@@ -1,6 +1,3 @@
 ### things missed
 
-# user management & profile
-
-- password reset left
-- user profile delete left
+- lastName in db should be mandatory
