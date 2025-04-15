@@ -153,7 +153,7 @@ groupRouter.get("/:groupId/members", userAuth, async (req, res) => {
     const { groupId } = req.params;
     const members = await Membership.find({ group_id: groupId }).populate(
       "user_id",
-      "name email profile_pic bio",
+      "firstName lastName emailId profile_pic bio",
     );
 
     res.status(200).json(members);
