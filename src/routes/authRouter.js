@@ -34,7 +34,7 @@ authRouter.post("/login", async (req, res) => {
 
     if (!user) throw new Error(" user doesn't exists");
 
-    const checkUser = user.validateUserPassword(password);
+    const checkUser = await user.validateUserPassword(password);
 
     if (!checkUser) {
       throw new Error("invalid password ");
