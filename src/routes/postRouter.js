@@ -7,8 +7,44 @@ const Membership = require("../Schema/Membership");
 
 const postRouter = express.Router();
 
+// Retrieve public posts (posts with is_public=true)
+postRouter.get("/public", userAuth, async (_req, res) => {
+  try {
+    let filter = { is_public: true, post_type: "question" };
+
+    const posts = await Post.find(filter).populate(
+      "user",
+      "firstName LastName",
+    );
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error("Error fetching public post details:", error);
+    res.status(500).json({ error: "Error fetching public posts" });
+  }
+});
+
+// Retrieve private posts of a group
+postRouter.get("/private/:groupId", userAuth, async (req, res) => {
+  try {
+    let filter = {
+      is_public: false,
+      post_type: "question",
+      group: req.params.groupId,
+    };
+
+    const posts = await Post.find(filter).populate(
+      "user",
+      "firstName LastName",
+    );
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error("Error fetching public post details:", error);
+    res.status(500).json({ error: "Error fetching public posts" });
+  }
+});
+
 /**
- * @route   GET /api/posts/:id
+ * @route   GET /posts/:id
  * @desc    Get a specific Q&A post (question) along with its answers (only for questions)
  * @access  Private
  */
@@ -315,7 +351,7 @@ postRouter.post("/", userAuth, async (req, res) => {
 });
 
 /**
- * @route   GET /api/posts
+ * @route   GET /posts
  * @desc    Get all Q&A posts (questions and announcements)
  * @access  Private
  *

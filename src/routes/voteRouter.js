@@ -47,17 +47,31 @@ voteRouter.post("/:postId", userAuth, async (req, res) => {
       post.votes += 1;
       await post.save();
 
-      return res
-        .status(201)
-        .json({
-          message: "Upvoted successfully",
-          vote: newVote,
-          votes: post.votes,
-        });
+      return res.status(201).json({
+        message: "Upvoted successfully",
+        vote: newVote,
+        votes: post.votes,
+      });
     }
   } catch (error) {
     console.error("Error toggling vote:", error);
     res.status(500).json({ error: "Error toggling vote" });
+  }
+});
+
+// Route to fetch all post IDs in which the current user has voted
+voteRouter.get("/myVotes", userAuth, async (req, res) => {
+  try {
+    // Query all votes by the current user
+    const votes = await Vote.find({ user_id: req.user._id });
+    // Map the votes to an array of post IDs (ensure conversion to string, if needed)
+    const votedPostIds = votes.map((vote) => vote.post.toString());
+
+    // Respond with the array of post IDs
+    return res.status(200).json({ votedPostIds });
+  } catch (error) {
+    console.error("Error fetching user votes:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
