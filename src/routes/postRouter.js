@@ -138,7 +138,7 @@ postRouter.post("/:id/answer", userAuth, async (req, res) => {
 });
 
 /**
- * @route   PUT /api/posts/:id
+ * @route   PUT /posts/:id
  * @desc    Update a post (only the creator or a group moderator can update)
  * @access  Private
  */
@@ -181,7 +181,7 @@ postRouter.put("/:id", userAuth, async (req, res) => {
 });
 
 /**
- * @route   DELETE /api/posts/:id
+ * @route   DELETE /posts/:id
  * @desc    Delete a post (cascade deletion for questions)
  * @access  Private
  */
@@ -233,7 +233,7 @@ postRouter.delete("/:id", userAuth, async (req, res) => {
 });
 
 /**
- * @route   PUT /api/posts/:id/approve
+ * @route   PUT /posts/:id/approve
  * @desc    Approve an answer (only a moderator or parent question's creator can approve)
  * @access  Private
  */
@@ -286,7 +286,7 @@ postRouter.put("/:id/approve", userAuth, async (req, res) => {
 });
 
 /**
- * @route   POST /api/posts
+ * @route   POST /posts
  * @desc    Create a new Question or Announcement post
  * @access  Private
  *
